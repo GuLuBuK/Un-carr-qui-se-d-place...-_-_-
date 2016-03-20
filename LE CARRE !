@@ -1,0 +1,58 @@
+<style type="text/css">
+	body {background: #000;}
+	#conteneur {width: 400px;height: 300px;border: 1px solid #333;
+    			margin: 0 auto;background: #FFF;text-align: center;}
+	h1 {text-align: center;font-variant: small-caps;color: #FFF;}
+	p {text-align: center;font-variant: small-caps;color: #FFF;}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+	// Constantes du jeu
+
+	// Largeur du jeu
+	var ZONE_JEU_WIDTH = 400;
+	// Hauteur du jeu
+	var ZONE_JEU_HEIGHT = 300;
+	// Variables
+    var SQUARE_JEU_WIDTH = 10;
+    var SQUARE_JEU_HEIGHT = 10;
+	var PXL_DEPLA = 10;
+    var context;
+	var boucleJeu;
+	var PlayerSquareY;
+	var PlayerSquareX;
+	window.addEventListener('load', function () {
+	    // On récupère l'objet canvas pour dessiner dedans
+	    context = document.getElementById('canvasElem').getContext('2d');
+
+	    // Boucle de rafraichissement du contexte 2D
+	    boucleJeu = setInterval(refreshGame, 10);
+        
+        window.document.onkeydown = deplacement;
+	}, false);
+
+	PlayerSquareY = ZONE_JEU_WIDTH-200;
+    PlayerSquareX = ZONE_JEU_HEIGHT-175;
+
+	function refreshGame() {
+
+	    // On efface la zone
+	    context.clearRect(0, 0, ZONE_JEU_WIDTH, ZONE_JEU_HEIGHT);
+
+	    // Puis on réaffiche le nécessaire
+    
+     context.fillStyle = "#333333";
+	    context.fillRect(PlayerSquareX,PlayerSquareY,SQUARE_JEU_WIDTH,SQUARE_JEU_HEIGHT);
+}
+    function deplacement(e) {
+		//quand on appuie sur la touche du bas, on va en bas
+	    if(e.keyCode == 40) {
+	    PlayerSquareY = PlayerSquareY + PXL_DEPLA;
+        }else if(e.keyCode == 38) {
+		PlayerSquareY = PlayerSquareY - PXL_DEPLA;
+        }else if(e.keyCode == 37) {
+		PlayerSquareX = PlayerSquareX - PXL_DEPLA;
+        }else if(e.keyCode == 39) {
+		PlayerSquareX = PlayerSquareX + PXL_DEPLA;
+        }}
+</script>
